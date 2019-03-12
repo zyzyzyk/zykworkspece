@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>作用域</title>
+</head>
+<body>
+    <script>
+       var name="an";
+       {//块级作用域
+           let boy="ye";
+       }
+       var boy;
+    //    引用一个不在作用域里的一个变量会报错
+    console.log(window.boy);
+    </script>
+</body>
+</html>

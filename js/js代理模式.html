@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>talk in js-代理模式</title>
+</head>
+<body>
+    <script>
+           Object
+           const xsj={
+                 name='zyk',
+                 age='20',
+                 single=true,
+                 hometown='樟树',
+                 room=1313,
+                 yz=84,
+                 //上面都为属性；
+                 //函数功能function匿名函数target形参。
+                 sendFlower:function(target){
+                     //对象的行为方法函数
+                     //console.log(target.name)
+                     target.receiveFlower(xsj);
+                 }
+           };
+           const meimei={
+               name='llf',
+               age='19',
+               mood=50,
+               receiveFlower:function(sender){
+                   //如果心情指数大于80则收，否则不收if-else;
+                   if(meimei.mood<80){
+                       console.log('心情不好不想收');
+                   }
+                   else{
+                       console.log('心情指数高于80，接受');
+                   }
+               },
+               listenGoodMood:function(){
+                   //心情不好，定时器
+                   //相当于是console.log('我看不见')；
+                   setTimeout(function(){
+                       meimei.mood=85;
+                       meimei.receiveFlower();
+                   },3000);
+           }
+        }
+           const huahua={
+                    name='花花',
+                    age='20',
+                    receiveFlower:function(sender){
+                        meimei.listenGoodMood()
+                    }
+           };
+    </script>
+    
+</body>
+</html>
