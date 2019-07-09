@@ -1,0 +1,19 @@
+html {
+  font-size: 14px;
+  font-family: -apple-system sans-serif;
+  text-rendering: optimizeLegibility;
+  color: #00f;
+}
+body {
+  font-size: 14px;
+  background-color: #f4f4f5;
+  margin: 0;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+a.button {
+  -webkit-border-radius: 50%;
+  -moz-boder-radius: 50%;
+  -moz-boder-radius: 50%;
+  -o-boder-radius: 50%;
+}

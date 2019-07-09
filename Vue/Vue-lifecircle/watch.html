@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+  <title>watch</title>
+</head>
+<body>
+  <div id="app">
+    <div class="wendu">{{wendu}}</div>
+    <p class="suggesttion">{{suggesttion}}</p>
+    <div class="btn">
+      <button @click='add'>add</button>
+      <button @click='reduce'>reduce</button>
+    </div>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data () {
+        return {
+          wendu: 26,
+          suggesttion: '短袖'
+        }
+      },
+      methods: {
+        add () {
+          this.wendu += 5
+        },
+        reduce () {
+          this.wendu -= 5
+        }
+      },
+      // watch: {
+      //   wendu: function (newVal,oldVal) {
+      //     if (newVal >= 26) {
+      //       this.suggesttion = '短袖'
+      //     }else if (newVal <= 26 && newVal > 0) {
+      //       this.suggesttion = '厚衣服'
+      //     }else {
+      //       this.suggesttion = '棉袄'
+      //     }
+      //   }
+      // },
+    })
+    app.$watch('wendu', function(newVal,oldVal) {
+      if (newVal >= 26) {
+            this.suggesttion = '短袖'
+          }else if (newVal <= 26 && newVal > 0) {
+            this.suggesttion = '厚衣服'
+          }else {
+            this.suggesttion = '棉袄'
+          }
+    })
+  </script>
+</body>
+</html>

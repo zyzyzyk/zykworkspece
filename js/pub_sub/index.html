@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>订阅发布者模式</title>
+    <style>
+        html,body{
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // listener 收听者:callback 发布者:document.body
+        // 注册事件，鼠标点击，事件回调函数执行
+        // document.body.addEventListener('click',function() {
+        //     alert('111');
+        // },false);
+        // document.body.addEventListener('click',function() {
+        //     alert('222');
+        // },false);
+        // document.body.addEventListener('click',function() {
+        //     alert('333');
+        // },false);
+        let yq = {
+            name:'yeqing',
+            yz: 99};//发布者
+        yq.peopleList = [];//存储订阅者的地方
+        yq.listen = function(fn) {
+            this.peopleList.push(fn);
+        }
+        yq.trigger = function (){
+            for(var i=0,fn;fn = this.peopleList[i++];){
+                
+                fn.call(this,'今晚有空')
+            }
+        }
+        yq.listen(function (msg) {
+            console.log(`唱${this.name} ${msg}歌`);
+        });
+        yq.listen(function (msg) {
+            console.log(`跳${this.name} ${msg}舞`);
+        });
+        yq.listen(function (msg) {
+            console.log(`打${this.name} ${msg}游戏`);
+        });
+        console.log(yq.peopleList.length);
+        // 先形成他们之间的关系
+        setTimeout(() => {
+            yq.trigger();
+        },3000)
+    </script>
+</body>
+</html>

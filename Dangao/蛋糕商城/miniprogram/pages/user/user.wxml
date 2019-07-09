@@ -1,0 +1,19 @@
+
+<view class="ub">
+  <view class="item item-a" >
+    <view class="icon">
+    </view>
+    <view class="tit" >
+      <navigator url="../user/myorder/myorder" open-type="navigate" hover-class="navigator-hover">我的订单</navigator>
+    </view>
+    <view class="con"></view>
+  </view>
+  <view class="item item-a">
+    <view class="icon">
+    </view>
+    <view class="tit" >
+      <navigator url="../user/myaddress/myaddress" open-type="navigate" hover-class="navigator-hover">收货地址</navigator>
+    </view>
+    <view class="con"></view>
+  </view>
+</view>
