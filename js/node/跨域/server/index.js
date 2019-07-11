@@ -19,14 +19,15 @@ app.use(async (ctx,next) => {
   ctx.set('Access-Control-Allow-Credentials', true)
   await next();
 })
-router.get('/api/post', async function (ctx) {
+router.get('/api/jsonp', async (ctx) => {
   // console.log(ctx.headers);
-  console.log('cookie', ctx.cookies.get('name'));
-  ctx.body = [
-    { title: 'node.js 入门到精通', createTime: '2018-12-12' },
-    { title: 'php 入门到精通', createTime: '2018-11-11' },
-  ]
-});
+  const cb = ctx.request.query.callback;
+  const person = {
+    name: 'name1',
+    age: 1
+  }
+  ctx.body = `${cb}(${JSON.stringify(person)})`;
+})
 app
   .use(router.routes())
   .use(router.allowedMethods());

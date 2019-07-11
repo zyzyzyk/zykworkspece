@@ -16,7 +16,8 @@
     window.addEventListener('message', function (e) {
       const data = e.data;
       console.log('data', data);
-      fetch('http://localhost:9999/api/post?name=' + data, {
+    })
+    fetch('http://localhost:9999/api/post?name=', {
         headers: {
           'X-custom': 'abc'
         },
@@ -25,10 +26,11 @@
         .then(res => res.json())
         .then(res => {
           // console.log('请求结果', res)
-          window.parent.postMessage(res, '*');
+          // window.parent.postMessage(res, '*');
+          window.name = JSON.stringify(res);
+          console.log(res)
+          window.location = 'http://127.0.0.1:8080/windowNameMiddle.html'
         })
-
-    })
   </script>
 </body>
 

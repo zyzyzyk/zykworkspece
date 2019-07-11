@@ -27,3 +27,24 @@ http://localhost:8888/api/
 2. postMessage 用于两个窗口之间传递数据
 3. 前端页面 通过 postMessage 向后端目录下面的 html 传递接口需要的请求参数
 4. 后端页面 通过 postMessage 向前端页面 传递 接口结果
+
+## jsonp
+1. 定义一个回调
+2. 将回调函数名字 告诉后端 后端会返回
+   ```js
+   回调(res)
+   ```
+3. script 标签加载过后 执行 返回的内容
+
+缺点：只能发起 get请求
+
+写一个jsonp的函数，以promise的方式调用
+jsonp(url)
+.then(res => {
+
+})
+
+## iframe + Window.name
+iframe 共享 window.name
+
+没有 postMessage 只能借助 中间页面 通知 前端页面 window.parent.callback(window.name)
