@@ -13,13 +13,13 @@ a2.left = a3
 var inorderTraversal = function(root) {
   let arr = [];
   const inorder = root => {
-    if(root === null)return null 
+    if(root === null) return null; 
     inorder(root.left);
     arr.push(root.val);
     inorder(root.right);
     // arr.push(root);
   }
-  inorder(root)
+  inorder(root);
   return arr;
 }
 console.log(inorderTraversal(a1))
