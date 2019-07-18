@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    function* test() {
+      console.log(1)
+      let a = yield 1
+      console.log('a',a);
+      let b = yield 2
+      console.log('b',b);
+      let c = yield 3
+      console.log('c',c);
+    }  
+    // 惰性的
+    var g = test();
+    let gn = g.next();
+    while(!gn.done) {
+      gn = g.next(gn.value);
+    }
+    // 生成一个对象 { next }
+    // 调用 next 一步一步执行
+
+    // 让generate函数自己全部执行完
+    function* test1() {
+      let a = yield true;
+      console.log('a',a);
+      let b = yield 1000
+      console.log('b',b);
+    // 惰性的
+    // var g = test();
+    }
+    function autoRun(generateFun) {
+      let g = generateFun();
+      let gn = g.next();
+      while(!gn.done) {
+        gn = g.next(gn.value)
+      }  
+    }
+    autoRun1(test1);
+    autoRun1(test);
+
+    function autoRun1(generateFun) {
+      var g = generateFun();
+      function next(data) {
+        var result = g.next(data);
+        if(result.done) return;
+        next(result.value);
+      }
+      next();
+    }
+    // (async function() {
+	  //   let a = await fooPromise();
+    //   let b = await 2;
+    // }) ()
+    let fooPromise = function() {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {resolve()}, 1000);
+      })
+    }
+    _asyncToGenetator(
+      function* () {
+        let a = yield fooPromise();
+        let b = yield 2;
+      }
+    )
+    function _asyncToGenetator(generateFun) {
+      return new Promise((resolve, reject) => {
+        let gen = generateFun();
+        function step(key, arg){
+          let info = {};
+          info = gen[key](arg);
+          if(info.done) {
+            resolve()
+          }else {
+            return Promise.resolve(info.value).then((v) =>{
+              return step('next')
+            })
+          }
+        } ;
+        step('next');
+      })
+    }
+  </script>
+</body>
+</html>
