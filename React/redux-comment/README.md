@@ -4,3 +4,6 @@
 
 redux      ：js的库
 react-redux: react 组件
+
+container 组件 connect
+component 组件 只接收 props 的组件 
