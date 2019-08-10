@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    button.red{
+      color: red;
+    }
+    .btn{
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <button class="btn">按钮</button>
+  <script>
+    var btn = document.querySelector('.btn');
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('red');
+    });
+    // es6 class
+    class ToggleColor {
+      constructor(tag, defaultVal) {
+        var ele = document.createElement(tag);
+        var text = document.createTextNode(defaultVal);
+        ele.classList.add('btn');
+        ele.appendChild(text);
+        this.node = ele;
+        this.attchEvent();
+      }
+      attchEvent() {
+        this.node.addEventListener('click',() => {
+          this.node.classList.toggle('red');
+        })
+      }
+    }
+    for(let i = 0; i < 10; i++) {
+      document.body.appendChild(
+        (new ToggleColor('span', 'span ele')).node
+      )
+    }
+    console.log(typeof ToggleColor);
+    // es6 class 背后是es5 的语法糖
+    function Foo() {
+
+    };
+    new Foo();
+    class B extends ToggleColor {}
+    // es6 class 的继承 使用的是 es5 的寄生组合继承
+  </script>
+</body>
+</html>
